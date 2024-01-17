@@ -1,5 +1,6 @@
 
 
+
 const jugador = document.querySelector(".jugador");
 const numero = document.querySelector(".numero");
 const caja = document.querySelector(".ecenario");
@@ -111,7 +112,7 @@ function agarrarObjeto() {
         espada.style.margin = '-10px 0px'
         espada.style.width = '20px';
 
-      //   verificador de espada
+    
 
 
     }
@@ -129,14 +130,14 @@ function soltarObjeto() {
 
 function girarEspada() {
   
-
+ verificador.style.width = '150px'  
    setTimeout(() => {
-      verificador.style.width = '150px'  
+     
       espada.style.width = '150px'  
       espada.style.transition = 'transform 500ms ease-in-out'; 
         espada.style.transform = 'rotate(180deg)';
        
-   }, 600);
+   }, 200);
    
   
       setTimeout(() => {
@@ -144,7 +145,7 @@ function girarEspada() {
          espada.style.transition = 'transform 1200ms ease-in-out'; 
          espada.style.transform = 'rotate(0deg)';
          espada.style.width = '30px'
-    }, 1300);
+    }, 1000);
    
 }
 
@@ -156,138 +157,151 @@ function seguirPersonaje(){
 
    console.log(seguir.x, seguir.y);
 
-   // enemigo.style.margin = `${seguir.y }px ${seguir.x }px`
+    enemigo.style.margin = `${seguir.y }px ${seguir.x }px`
    
 
 }
 
-
-
-function verificarColision() {
-   const rect1 = enemigo.getBoundingClientRect();
-   const rect2 = verificador.getBoundingClientRect();
-   const rect3 = jugador.getBoundingClientRect();
-
-
-   if (
-       rect1.left < rect2.left + rect2.width &&
-       rect1.left + rect1.width > rect2.left &&
-       rect1.top < rect2.top + rect2.height &&
-       rect1.top + rect1.height > rect2.top 
-      
-  ) {
-     reproducirSonido()
-     pantallaGanadora()
-  }
-
-   // Verificar colisión o proximidad
-
-    if(rect1.left < rect3.left + rect3.width &&
-      rect1.left + rect1.width > rect3.left &&
-      rect1.top < rect3.top + rect3.height &&
-      rect1.top + rect1.height > rect3.top &&
-      objetoAgarrado == false){
-     pantallaPerdedora()  
-   }
-       
-
-}
-
-const rect1 = enemigo.getBoundingClientRect();
-
- console.log(rect1.x, rect1.y);
-
-
-
-for(i = 0 ; i <= 78 ; i++){
-   const divPiso =  document.createElement('div');
-   divPiso.style.background =  'rgba(117, 108, 108, 0.801)';
-   divPiso.style.border= '3px solid rgb(75, 47, 47)';
-   divPiso.style.boxShadow = '2px 2px 2px 2px rgba(0, 0, 0, 0.616)';
+   
+   function verificarColision() {
+      const rect1 = enemigo.getBoundingClientRect();
+      const rect2 = verificador.getBoundingClientRect();
+      const rect3 = jugador.getBoundingClientRect();
+      const rect4 = espada.getBoundingClientRect();
+     
 
    
-   
-      espada.style.width = '80px';
-      espada.style.position = 'absolute';
-      espada.style.height = '5px';
-      espada.style.background = 'black';
-      espada.style.margin = '500px';
-      espada.style.transition = '3s';
-      caja.appendChild(espada);
-      caja.appendChild(divPiso);
-      
-}
-
-
-var valorY = 100;
-let valorX = 100;
-
-numero.innerHTML = `${valorY}Y `+` ${valorX}X`;
-
-addEventListener("keydown", function(e){
-
-   //  alert(e.code)
-
-   if(e.code == e.code){
-      pantalla.style.visibility = 'hidden';
-      jugador.style.visibility = 'visible'
-   }
-
-   if(e.code == 'ArrowUp'){
-      if(valorX > 0 ){
-        valorX -= 50
-        numero.innerHTML = `${valorY}Y `+` ${valorX}X`;
-         jugador.style.marginTop = `${valorX}px`;
-        }
-      }
-   
-   if(e.code == "ArrowDown"){
-     if(valorX < 500){
-      valorX += 50
-      numero.innerHTML = `${valorY}Y `+` ${valorX}X`;
-      jugador.style.marginTop = `${ valorX}px`;
+      if (
+          rect2.left < rect1.left + rect1.width &&
+          rect2.left + rect2.width > rect1.left &&
+          rect2.top < rect1.top + rect1.height &&
+          rect2.top + rect2.height > rect1.top 
+         
+     ) {
+        reproducirSonido()
+        pantallaGanadora()
      }
-   }
-   if(e.code == "ArrowRight"){
-      if(valorY < 1200){
-         valorY += 50
-         numero.innerHTML = `${valorY}Y `+` ${valorX}X`;
-         jugador.style.marginLeft = `${  valorY}px`;
+
+     if (
+      rect3.left < rect4.left + rect4.width &&
+      rect3.left + rect3.width > rect4.left &&
+      rect3.top < rect4.top + rect4.height &&
+      rect3.top + rect3.height > rect4.top 
+     
+       ) {
+         agarrarObjeto()
+     }
+
+   
+      // Verificar colisión o proximidad
+   
+       if(rect1.left < rect3.left + rect3.width &&
+         rect1.left + rect1.width > rect3.left &&
+         rect1.top < rect3.top + rect3.height &&
+         rect1.top + rect1.height > rect3.top &&
+         objetoAgarrado == false){
+        pantallaPerdedora()  
       }
+          
+   
    }
-   if(e.code == "ArrowLeft"){
-      if(valorY > 0){
-         valorY -= 50
-        numero.innerHTML = `${valorY}Y `+` ${valorX}X`;
-        jugador.style.marginLeft = `${valorY}px`;
-      }     
+   
+   
+   
+   
+   
+   for(i = 0 ; i <= 78 ; i++){
+      const divPiso =  document.createElement('div');
+      divPiso.style.background =  'rgba(117, 108, 108, 0.801)';
+      divPiso.style.border= '3px solid rgb(75, 47, 47)';
+      divPiso.style.boxShadow = '2px 2px 2px 2px rgba(0, 0, 0, 0.616)';
+   
+      
+      
+         espada.style.width = '80px';
+         espada.style.position = 'absolute';
+         espada.style.height = '5px';
+         espada.style.background = 'black';
+         espada.style.margin = '500px';
+         espada.style.transition = '3s';
+         caja.appendChild(espada);
+         caja.appendChild(divPiso);
+         
    }
-   if(e.code == "Escape"){
-      pantallaPause()
-   }
-   verificarColision()
-   seguirPersonaje()
-})
-
-
-
-addEventListener('keydown', (event) => {
-    if( jugador.style.marginTop === espada.style.marginTop && jugador.style.marginLeft === espada.style.marginLeft || objetoAgarrado ){
-       if(event.key === 'Enter'){
-          if (objetoAgarrado) {
-                soltarObjeto()
-             } else {
-                agarrarObjeto();
-            }
-          }
-    
-        } 
-        if(objetoAgarrado){
-         if(event.key === ' '){
-            girarEspada()
+   
+   
+   var valorY = 100;
+   let valorX = 100;
+   
+   numero.innerHTML = `${valorY}Y `+` ${valorX}X`;
+   
+   addEventListener("keydown", function(e){
+   
+      //  alert(e.code)
+   
+      if(e.code == e.code){
+         pantalla.style.visibility = 'hidden';
+         jugador.style.visibility = 'visible'
+      }
+   
+      if(e.code == 'ArrowUp'){
+         if(valorX > 0 ){
+           valorX -= 50
+           numero.innerHTML = `${valorY}Y `+` ${valorX}X`;
+            jugador.style.marginTop = `${valorX}px`;
+           }
          }
+      
+      if(e.code == "ArrowDown"){
+        if(valorX < 500){
+         valorX += 50
+         numero.innerHTML = `${valorY}Y `+` ${valorX}X`;
+         jugador.style.marginTop = `${ valorX}px`;
         }
-  });
+      }
+      if(e.code == "ArrowRight"){
+         if(valorY < 1200){
+            valorY += 50
+            numero.innerHTML = `${valorY}Y `+` ${valorX}X`;
+            jugador.style.marginLeft = `${  valorY}px`;
+         }
+      }
+      if(e.code == "ArrowLeft"){
+         if(valorY > 0){
+            valorY -= 50
+           numero.innerHTML = `${valorY}Y `+` ${valorX}X`;
+           jugador.style.marginLeft = `${valorY}px`;
+         }     
+      }
+      if(e.code == "Escape"){
+         pantallaPause()
+      }
+      verificarColision()
+      seguirPersonaje()
+   })
+   
+   
+   addEventListener('keydown', (event) => {
+       if( jugador.style.marginTop === espada.style.marginTop && jugador.style.marginLeft === espada.style.marginLeft || objetoAgarrado ){
+          if(event.key === 'Enter'){
+             if (objetoAgarrado) {
+                   soltarObjeto()
+                } else {
+                   agarrarObjeto();
+               }
+             }
+       
+           } 
+           if(objetoAgarrado){
+            if(event.key === ' '){
+               girarEspada()
+            }
+           }
+     });
+   
+
+
+
 
 
 

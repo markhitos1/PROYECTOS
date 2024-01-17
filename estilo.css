@@ -152,8 +152,6 @@ p{
     grid-template-columns:15px 35px 35px 15px ;
     grid-template-rows: 40px 40px 20px;
     transition: 500ms;
-    background-color: #ffff00ef;
-    box-shadow: 10px 10px 50px 40px yellow;
    
 }
 
@@ -220,29 +218,6 @@ p{
     grid-column: 3/ 3;
 }
 
-/* ENEMIGO */
-
- /* .enemigo{
-    position: absolute;
-    margin: 300px;
-    width: 50px;
-    height: 50px ;
-    background-color: red;
-}  */
-
-
-/* TRABAJANDO CON VUE */
-
-
-/* enemigo{
-    position: absolute;
-    margin: 300px;
-    width: 50px;
-    height: 50px ;
-    background-color: red;
-} */
-
-
 .enemigo {
     position: absolute;
     margin: 100px 500px;
@@ -253,7 +228,7 @@ p{
 }
 .cuerpo-enemigo{
     height: 100%;
-    background-color: aliceblue;
+  
     border: 3px solid black;
 
 }
